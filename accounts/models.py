@@ -43,7 +43,21 @@ class Admin(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True)
     business_name = models.CharField(max_length=200)
 
+    class Meta:
+        verbose_name = 'admin'
+        verbose_name_plural = 'admins'
+
+    def __str__(self):
+        return self.user.fullname
+
 
 class Agent(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True)
     admin = models.ForeignKey(Admin, on_delete=models.CASCADE, related_name='agents')
+
+    class Meta:
+        verbose_name = 'agent'
+        verbose_name_plural = 'agents'
+
+    def __str__(self):
+        return self.user.fullname
