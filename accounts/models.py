@@ -13,9 +13,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_admin = models.BooleanField(default=False)
     is_agent = models.BooleanField(default=False)
 
-    phone_number = models.PositiveIntegerField(
+    phone_number = models.CharField(
         _('phone number'),
         unique=True,
+        max_length= 12,
         error_messages={
             'unique': _("A user with that phone number already exists."),
         })
