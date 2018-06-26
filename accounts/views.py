@@ -3,7 +3,7 @@ from django.views import generic
 from django.contrib.auth import login, authenticate
 from django.shortcuts import redirect, render, get_object_or_404
 
-from .forms import AdminSignUpForm, AgentSignupForm
+from .forms import AdminSignUpForm, AgentSignupForm, CreateAgentForm
 from .models import Admin, Agent
 
 # Create your views here.
@@ -36,3 +36,17 @@ def agent_signup(request, admin_id):
     else:
         form = AgentSignupForm()
     return render(request, 'registration/signup.html', {'form': form})
+
+
+def send_message(request, admin_id):
+    """
+    This is the function that will receive the agent phone number as a form POST and implements the
+    sending of the text message to the user. The text message is a url where the agent can create
+    their account. The url link will be different for each admin user.
+    :return:
+    """
+    if request.method == 'POST':
+        agent_number = request.POST.get('agent_phone_number')
+        # The logic for sending the message will be here.
+    form = CreateAgentForm()
+    return render(request, 'registration/create_agent.html', {'form': form})
